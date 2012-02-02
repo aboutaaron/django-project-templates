@@ -1,5 +1,6 @@
-# Chicago Tribune News Applications fabfile
-# No copying allowed
+# CIR news applications fabfile
+# Shamelessly copied and modified from the Chicago Tribune's News Applications fabfile
+# We encourage you to copy this floppy (http://www.youtube.com/watch?v=up863eQKGUI)
 
 from fabric.api import *
 

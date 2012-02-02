@@ -25,6 +25,7 @@ setup(
         django_project=django_project_templates.pastertemplates:DjangoProjectTemplate
         django_cruisecontrol_project=django_project_templates.pastertemplates:DjangoCruiseControlTemplate
         newsapps_project=django_project_templates.pastertemplates:NewsAppsProjectTemplate
+        cir_project=django_project_templates.pastertemplates:CIRProjectTemplate
     """,
     classifiers = [
         "Intended Audience :: Developers",
