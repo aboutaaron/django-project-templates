@@ -61,3 +61,12 @@ class NewsAppsProjectTemplate(DjangoTemplate):
         append_secret_key(self.vars)
         append_db_password(self.vars)
         super(NewsAppsProjectTemplate, self).__init__(name)
+
+class CIRProjectTemplate(NewsAppsProjectTemplate):
+    _template_dir = 'templates/cir_project'
+    summary = 'Template for a CIR Django news application'
+    
+    def __init__(self, name):
+        append_secret_key(self.vars)
+        append_db_password(self.vars)
+        super(CIRProjectTemplate, self).__init__(name)    
