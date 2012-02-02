@@ -18,7 +18,7 @@ env.apache_config_path = '/home/newsapps/sites/apache/%(project_name)s' % env
 env.python = 'python2.6'
 env.repository_url = "$(repository_url)"
 env.multi_server = False
-env.memcached_server_address = "cache.example.com"
+env.memcached_server_address = "localhost"
 
 """
 Environments

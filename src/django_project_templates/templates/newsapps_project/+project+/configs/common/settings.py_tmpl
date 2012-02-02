@@ -17,17 +17,18 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-# Database
-# Note: DATABASE_USER and DATABASE_PASSWORD are defined in the staging and
-# production settings.py files. For local use, either define them in
-# local_settings.py or ignore to use your local user.
-DATABASE_ENGINE = 'postgresql_psycopg2'
-DATABASE_HOST = 'localhost'
-DATABASE_PORT = '5432'
-DATABASE_NAME = '$(project)'
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.psycopg2',
+        'HOST': 'localhost',
+        'NAME': '$(project)',
+        'PASSWORD': '$(db_password)'
+        'PORT': '5432',
+    }
+}
 
 # Local time
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/Los_Angeles'
 
 # Local language
 LANGUAGE_CODE = 'en-us'
@@ -90,13 +91,6 @@ INSTALLED_APPS = (
 
 # Predefined domain
 MY_SITE_DOMAIN = 'localhost:8000'
-
-# Email
-# run "python -m smtpd -n -c DebuggingServer localhost:1025" to see outgoing
-# messages dumped to the terminal
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
-DEFAULT_FROM_EMAIL = 'do.not.reply@$(production_domain)'
 
 # Caching
 CACHE_MIDDLEWARE_KEY_PREFIX='$(project)'

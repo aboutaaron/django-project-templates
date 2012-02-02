@@ -4,10 +4,15 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 # Database
-DATABASE_HOST = 'db.$(staging_domain)'
-DATABASE_PORT = '5433'
-DATABASE_USER = '$(project)'
-DATABASE_PASSWORD = '$(db_password)'
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.psycopg2',
+        'HOST': 'db.$(staging_domain)'
+        'NAME': '$(project)',
+        'PASSWORD': '$(db_password)'
+        'PORT': '5433',
+    }
+}
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
