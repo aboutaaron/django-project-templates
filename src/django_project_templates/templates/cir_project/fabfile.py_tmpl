@@ -17,7 +17,7 @@ env.env_path = '/home/projects/.virtualenvs/%(project_name)s/' % env
 env.repo_path = '%(path)s/repository' % env
 env.apache_config_path = '/home/projects/sites/apache/%(project_name)s' % env
 env.python = 'python2.6'
-env.repository_url = "$(repository_url)/%(project_name)s"
+env.repository_url = "$(repository_url)/%(project_name)s" % env
 env.multi_server = False
 env.memcached_server_address = "127.0.0.1"
 
