@@ -2,7 +2,10 @@
 # Shamelessly modified from the Chicago Tribune's News Applications fabfile
 # We encourage you to copy this floppy (http://www.youtube.com/watch?v=up863eQKGUI)
 
+import os
 from fabric.api import *
+
+BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
 """
 Base configuration
@@ -237,7 +240,10 @@ def load_new_data():
     load_data()
     pgpool_up()
     maintenance_down()
-    
+
+def dump_database(func=local):
+    func('pg_dump %s > %s/data/psql/dump.sql' % (env.project_name, BASE_DIR))
+
 def create_database(func=run):
     """
     Creates the user and database for this project.
