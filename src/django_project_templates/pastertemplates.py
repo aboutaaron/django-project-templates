@@ -66,6 +66,18 @@ class CIRProjectTemplate(NewsAppsProjectTemplate):
     _template_dir = 'templates/cir_project'
     summary = 'Template for a CIR Django news application'
     
+    vars = [
+        var('staging_domain',
+            'Parent domain for your staging site.',
+            default="beta.example.com"),
+        var('production_domain',
+            'Parent domain for your production site.',
+            default="example.com"),
+        var('repository_url',
+            'Git URL for the account your project will be deployed from',
+            default="git@github.com:cirlabs"),
+    ]
+    
     def __init__(self, name):
         append_secret_key(self.vars)
         append_db_password(self.vars)

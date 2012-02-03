@@ -17,7 +17,7 @@ env.env_path = '/home/projects/.virtualenvs/%(project_name)s/' % env
 env.repo_path = '%(path)s/repository' % env
 env.apache_config_path = '/home/projects/sites/apache/%(project_name)s' % env
 env.python = 'python2.6'
-env.repository_url = "$(repository_url)"
+env.repository_url = "$(repository_url)/%(project_name)s""
 env.multi_server = False
 env.memcached_server_address = "127.0.0.1"
 
@@ -211,6 +211,17 @@ def git_reset(commit_id):
     run("cd %(repo_path)s; git reset --hard %(commit_id)s" % env)
 
 """
+Commands - git
+"""
+
+def git_create_repo(func=local):
+    prompt("What is your github username?", key='gituser')
+    prompt("What is your github password?", key='gitpass')
+        
+    func('curl -XPOST -u "%(gituser)s:%(gitpass)s"  https://api.github.com/orgs/cirlabs/repos -d \'{"name":"%(project_name)s"}\'' % env)
+    func('git init; git add *; git commit -m "Initial commit"; git remote add origin %(repository_url)s; git push -u origin master;' % env)
+    
+"""
 Commands - data
 """
 def load_new_data():
@@ -314,10 +325,14 @@ def _execute_psql(query):
 def bootstrap():
     """
     Local development bootstrap: you should only run this once.
-    """    
+    """
+    local("pip install -r ./requirements.txt")
     create_database(local)
     local("chmod 755 ./manage")
     local("sh ./manage syncdb --noinput")
+    prompt("Do you want to create a git repository now? You'll need it to deploy later. (y or n)", key="buildgit")
+    if env.buildgit == 'y':
+        git_create_repo()
 
 def shiva_local():
     """
