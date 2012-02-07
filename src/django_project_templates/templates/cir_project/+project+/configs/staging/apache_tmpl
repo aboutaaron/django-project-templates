@@ -1,4 +1,6 @@
 <VirtualHost *:80>
+    ServerName $(staging_domain)
+
     WSGIScriptAlias /$(project) /home/projects/sites/django-projects/$(project)/repository/$(project)/configs/staging/staging.wsgi
     
     #Redirect permanent /favicon.ico http://media.$(staging_domain)/$(project)/na_media/favicon.ico
