@@ -94,6 +94,7 @@ def setup_directories():
     """
     run('mkdir -p %(path)s' % env)
     run('mkdir -p %(env_path)s' % env)
+    run('mkdir -p %(log_path)s' % env)
     run ('ln -s  %(env_path)s %(path)s/env' % env)
     sudo('chgrp -R www-data %(log_path)s; chmod -R g+w %(log_path)s;' % env)
     run('ln -s %(log_path)s %(path)s/logs' % env)
