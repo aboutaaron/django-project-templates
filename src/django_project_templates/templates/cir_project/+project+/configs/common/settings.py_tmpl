@@ -11,6 +11,17 @@ SITE_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__f
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+# Statis
+# Absolute path to the directory that holds static assets.
+STATIC_ROOT = os.path.join(SITE_ROOT, 'assets')
+
+# URL that handles the media served from STATIC_ROOT
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    ('admin', '../../../../env/lib/python2.6/site-packages/django/contrib/admin/media/'),
+)
+
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
@@ -41,14 +52,6 @@ SITE_ID = 1
 
 # Internationalization
 USE_I18N = False
-
-# Absolute path to the directory that holds media.
-MEDIA_ROOT = os.path.join(SITE_ROOT, 'assets')
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ''
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -94,6 +97,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.gis',
     'django.contrib.sitemaps',
+    'django.contrib.staticfiles',
 )
 
 # Predefined domain
