@@ -24,6 +24,8 @@ STATICFILES_DIRS = (
     ('admin', '../../../../env/lib/python2.6/site-packages/django/contrib/admin/media/'),
 )
 
+ADMIN_MEDIA_PREFIX = 'http://media.$(staging_domain)/$(project)/site_media/admin/'
+
 # Predefined domain
 MY_SITE_DOMAIN = '$(staging_domain)/$(project)'
 
