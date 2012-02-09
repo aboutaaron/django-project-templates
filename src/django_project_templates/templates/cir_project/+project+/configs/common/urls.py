@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    (r'^admin/(.*)', admin.site.urls),
+    (r'^admin/', include(admin.site.urls)),
 )
 
 if settings.DEBUG:
