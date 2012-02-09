@@ -365,4 +365,4 @@ def freeze_requirements():
     """
     Freezes requirements to requirements.txt.
     """
-    local('pip freeze -E %s > %s/requirements.txt' % (env.project_name, BASE_DIR))
+    local('workon %s; pip freeze > %s/requirements.txt' % (env.project_name, BASE_DIR))
