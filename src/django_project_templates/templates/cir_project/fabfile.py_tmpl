@@ -69,6 +69,15 @@ def branch(branch_name):
 """
 Commands - setup
 """
+def go_for_launch():
+    """
+    Local function that dumps database, copies requirements, and uploads everything
+    to github.
+    """
+    freeze_requirements()
+    dump_database()
+    git_checkin()
+
 def setup():
     """
     Setup a fresh virtualenv, install everything we need, and fire up the database.
@@ -224,6 +233,11 @@ def git_create_repo(func=local):
         
     func('curl -XPOST -u "%(gituser)s:%(gitpass)s"  https://api.github.com/orgs/cirlabs/repos -d \'{"name":"%(project_name)s"}\'' % env)
     func('git init; git add *; git commit -m "Initial commit"; git remote add origin %(repository_url)s; git push -u origin master;' % env)
+
+def git_checkin(func=local):
+    func("cd %s; git add ." % BASE_DIR)
+    prompt("Type your commit message here:", key='commitmessage')
+    func("git commit -am '%(commitmessage)s'; git push" % env)
     
 """
 Commands - data
@@ -320,7 +334,7 @@ def shiva_the_destroyer():
         run('s3cmd del --recursive s3://%(s3_bucket)s/%(project_name)s' % env)
 
 """
-Utility functions (not to be called directly)
+Utility functions
 """
 def _execute_psql(query):
     """
@@ -346,3 +360,9 @@ def shiva_local():
     Undo any local setup.  This will *destroy* your local database, so use with caution.
     """    
     destroy_database(local)
+    
+def freeze_requirements():
+    """
+    Freezes requirements to requirements.txt.
+    """
+    local('pip freeze -E %s > %s/requirements.txt' % (env.project_name, BASE_DIR))
