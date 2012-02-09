@@ -257,7 +257,7 @@ def load_new_data():
     maintenance_down()
 
 def dump_database(func=local):
-    func('pg_dump %s > %s/data/psql/dump.sql' % (env.project_name, BASE_DIR))
+    func('pg_dump %s | gzip -c > %s/data/psql/dump.sql.gz' % (env.project_name, BASE_DIR))
 
 def create_database(func=run):
     """
@@ -280,6 +280,7 @@ def load_data():
     """
     Loads data from the repository into PostgreSQL.
     """
+    run("gunzip %(path)s/repository/data/psql/dump.sql.gz" % env)
     run('psql -q %(project_name)s < %(path)s/repository/data/psql/dump.sql' % env)
     run('psql -q %(project_name)s < %(path)s/repository/data/psql/finish_init.sql' % env)
     
