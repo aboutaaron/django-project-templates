@@ -26,6 +26,7 @@ setup(
         django_cruisecontrol_project=django_project_templates.pastertemplates:DjangoCruiseControlTemplate
         newsapps_project=django_project_templates.pastertemplates:NewsAppsProjectTemplate
         cir_project=django_project_templates.pastertemplates:CIRProjectTemplate
+        heroku_project=django_project_templates.pastertemplates:HerokuProjectTemplate
     """,
     classifiers = [
         "Intended Audience :: Developers",
