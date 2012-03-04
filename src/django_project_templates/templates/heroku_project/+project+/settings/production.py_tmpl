@@ -1,0 +1,36 @@
+from common import *
+
+DEBUG = False
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '$(project)',
+        'PORT': '5432',
+        'HOST': 'data.apps.cironline.org',
+        'USER': '$(project)',
+        'PASSWORD': '$(db_password)'
+    }
+}
+
+# Static
+STATIC_URL = 'http://media.$(production_domain)/$(project)/'
+
+STATICFILES_DIRS = (
+    ('admin', '../../lib/python2.7/site-packages/django/contrib/admin/media/'),
+)
+
+ADMIN_MEDIA_PREFIX = 'http://media.$(production_domain)/$(project)/site_media/admin/'
+
+# S3
+AWS_S3_URL = 's3://media.$(production_domain)/$(project)/'
+
+# GEOS path for GeoDjango
+GEOS_LIBRARY_PATH = '/app/lib/libgeos_c.so'
+
+# Caching
+CACHES = {
+    'default': {
+        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache'
+    }
+}

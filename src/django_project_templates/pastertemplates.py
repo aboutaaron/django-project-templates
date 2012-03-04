@@ -81,4 +81,19 @@ class CIRProjectTemplate(DjangoTemplate):
     def __init__(self, name):
         append_secret_key(self.vars)
         append_db_password(self.vars)
-        super(CIRProjectTemplate, self).__init__(name)    
+        super(CIRProjectTemplate, self).__init__(name)
+
+class HerokuProjectTemplate(DjangoTemplate):
+    _template_dir = 'templates/heroku_project'
+    summary = 'Template for a CIR Django news application on Heroku'
+    
+    vars = [
+        var('production_domain',
+            'Parent domain for your production site.',
+            default="apps.cironline.org"),
+    ]
+    
+    def __init__(self, name):
+        append_secret_key(self.vars)
+        append_db_password(self.vars)
+        super(HerokuProjectTemplate, self).__init__(name)  
