@@ -71,7 +71,6 @@ def bootstrap():
     local('echo "export PYTHONPATH=%(localpath)s:%(localpath)s/%(project_name)s" >> \$WORKON_HOME/%(project_name)s/bin/postactivate' % env)
     local('echo "export PATH=\$PATH:%s" >> \$WORKON_HOME/%s/bin/postactivate' % (BASE_DIR, env.project_name))
     local('echo -e "*.pyc\ndata\\n%(project_name)s/gzip" > .gitignore' % env)
-    local('deactivate; workon %(project_name)s' % env)
 
 """
 Heroku deployment
