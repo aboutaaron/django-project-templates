@@ -89,7 +89,7 @@ class HerokuProjectTemplate(DjangoTemplate):
     
     vars = [
         var('production_domain',
-            'Parent domain for your production site.',
+            'Parent domain for your production data server.',
             default="apps.cironline.org"),
     ]
     

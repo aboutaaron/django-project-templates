@@ -64,7 +64,7 @@ STATIC_ROOT = os.path.join(SITE_ROOT, 'static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = '/site_media/'
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
@@ -134,7 +134,7 @@ INSTALLED_APPS = (
 
 # Caching
 CACHE_MIDDLEWARE_KEY_PREFIX = '$(project)'
-CACHE_MIDDLEWARE_SECONDS = 90 * 60 # 90 minutes
+CACHE_MIDDLEWARE_SECONDS = 3 # 3 seconds
 
 CACHES = {
     'default': {

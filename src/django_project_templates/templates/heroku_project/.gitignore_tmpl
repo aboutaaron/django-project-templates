@@ -1,9 +1,3 @@
 *.pyc
-*.db
-pip-log.txt
-build
-error.log
-*~
+data/*
 $(project)/gzip/*
-local_settings.py
-.idea

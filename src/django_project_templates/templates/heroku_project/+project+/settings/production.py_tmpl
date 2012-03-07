@@ -6,7 +6,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': '$(project)',
-        'PORT': '5432',
+        'PORT': '6432', # PgBouncer port
         'HOST': 'data.apps.cironline.org',
         'USER': '$(project)',
         'PASSWORD': '$(db_password)'
@@ -16,19 +16,15 @@ DATABASES = {
 # Static
 STATIC_URL = 'http://media.$(production_domain)/$(project)/'
 
-STATICFILES_DIRS = (
-    ('admin', '../../lib/python2.7/site-packages/django/contrib/admin/media/'),
-)
-
 ADMIN_MEDIA_PREFIX = 'http://media.$(production_domain)/$(project)/site_media/admin/'
 
-# S3
-AWS_S3_URL = 's3://media.$(production_domain)/$(project)/'
-
-# GEOS path for GeoDjango
-GEOS_LIBRARY_PATH = '/app/lib/libgeos_c.so'
+# GEOS paths for GeoDjango and GDAL. Configured for our particular Heroku setup.
+GEOS_LIBRARY_PATH = '/app/.geodjango/geos/lib/libgeos_c.so'
+GDAL_LIBRARY_PATH = '/app/.geodjango/gdal/lib/libgdal.so'
 
 # Caching
+CACHE_MIDDLEWARE_SECONDS = 90 * 60 # 90 minutes
+
 CACHES = {
     'default': {
         'BACKEND': 'django_pylibmc.memcached.PyLibMCCache'
