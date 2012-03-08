@@ -75,9 +75,7 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 STATICFILES_DIRS = (
     # File directories that you want to be collected into STATIC_ROOT using Django's
     # staticfiles toolkit. A good thing to put here would be the admin media directory.
-    # Here's an example of how that might look:
-    #('admin', '.virtualenvs/example/lib/python2.7/site-packages/django/contrib/admin/media/'),
-    os.path.join(SITE_ROOT, 'assets')
+    os.path.join(SITE_ROOT, 'assets'),
 )
 
 # List of finder classes that know how to find static files in
