@@ -14,7 +14,7 @@ DATABASES = {
 }
 
 # Static
-STATIC_URL = 'http://media.$(production_domain)/$(project)/'
+STATIC_URL = 'http://media.$(production_domain)/$(project)/site_media/'
 
 ADMIN_MEDIA_PREFIX = 'http://media.$(production_domain)/$(project)/site_media/admin/'
 
