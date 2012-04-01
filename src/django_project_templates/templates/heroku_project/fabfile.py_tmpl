@@ -98,7 +98,7 @@ Database setup and deploy
 """
 
 def dump_database(func=local):
-    func('pg_dump %(project_name)s | gzip -c > %(localpath)s/data/dump.sql.gz' % env)
+    func('pg_dump --no-owner %(project_name)s | gzip -c > %(localpath)s/data/dump.sql.gz' % env)
     
 def create_database(func=run):
     """
