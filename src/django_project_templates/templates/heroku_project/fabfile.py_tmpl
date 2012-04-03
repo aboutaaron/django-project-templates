@@ -73,7 +73,7 @@ def bootstrap():
     local('echo -e "*.pyc\ndata\\n%(project_name)s/gzip" > .gitignore' % env)
 
 """
-Heroku deployment
+Heroku
 """
 
 def setup_heroku():
@@ -92,6 +92,9 @@ def deploy_to_heroku():
     prompt("Type your commit message here:", key='commitmessage')
     local("git commit -m '%(commitmessage)s';" % env)
     local("git push heroku master")
+
+def heroku_shell():
+    local("heroku run python %(project_name)s/manage.py shell --settings=%(project_name)s.settings.production")
 
 """
 Database setup and deploy
