@@ -96,6 +96,9 @@ def deploy_to_heroku():
 def heroku_shell():
     local("heroku run python %(project_name)s/manage.py shell --settings=%(project_name)s.settings.production")
 
+def heroku_clear_cache():
+    local("heroku run python %(project_name)s/manage.py clearcache --settings=%(project_name)s.settings.production" % env)
+
 """
 Database setup and deploy
 """
@@ -160,7 +163,7 @@ def gzip_assets():
     GZips every file in the assets directory and places the new file
     in the gzip directory with the same filename.
     """
-    local('cd %s; python gzip_assets.py' % BASE_DIR)
+    local('cd %s; python ./bin/gzip_assets.py' % BASE_DIR)
 
 def deploy_to_s3():
     """

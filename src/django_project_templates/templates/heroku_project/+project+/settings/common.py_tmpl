@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     'gunicorn',
     
     # Project apps
+    'apps.core',
 )
 
 # Caching
