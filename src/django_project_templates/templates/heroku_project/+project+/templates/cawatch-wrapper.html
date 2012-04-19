@@ -83,27 +83,22 @@
 	
 		<header>
 			<ul class="section-label">
-				<li><a href="XXXX">Public Safety</a></li>
-				<li><a href="XXXX">Spotlight</a></li>
-				<li><a href="XXXX">Broken Shield</a></li>
+				<!--insert category-->
+				<li><a href="http://californiawatch.org/topic/public-safety">Public Safety</a></li>
+				<!--insert spotlight/daily report-->
+				<li><a href="http://californiawatch.org/spotlight">Spotlight</a></li>
+				<!--insert package name-->
+				<li><a href="http://californiawatch.org/broken-shield">Broken Shield</a></li>
 			</ul>
-			<h1>California Watch starter template</h1>
-			<p class="intro-text">Intro text herey and herey and herey and herey</p>
+			<h1>{% block main-headline %}{% endblock %}</h1>
+			<p class="intro-text">{% block intro-text %}{% endblock %}</p>
 		</header>
 		
 		<section id="main-body">
-			<p>Use this document as a way to quick start any new project. All you get is this message and a barebones HTML document.</p>
-			
-			<p>Use this document as a way to quick start any new project. All you get is this message and a barebones HTML document.</p>
-			
-			<p>Use this document as a way to quick start any new project. All you get is this message and a barebones HTML document.</p>
-			
-			<p>Use this document as a way to quick start any new project. All you get is this message and a barebones HTML document.</p>
-			
-			<p>Use this document as a way to quick start any new project. All you get is this message and a barebones HTML document.</p>
+			{% block inner-content %}{% endblock %}
 		
 			<footer>
-				<p class="sourceline">Interactive by XXXy and XXXy. Reporting by XXXy and XXXy.</p>
+				<p class="sourceline">{% block sourceline %}{% endblock %}</p>
 			</footer>
 		</section>
 
