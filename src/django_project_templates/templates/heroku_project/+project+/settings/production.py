@@ -1,6 +1,6 @@
 from common import *
 
-DEBUG = False
+DEBUG = True
 
 if DEBUG == True:
     MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + ('apps.core.middleware.LoginRequiredMiddleware',)
@@ -8,18 +8,18 @@ if DEBUG == True:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '$(project)',
+        'NAME': 'rainmaker',
         'PORT': '6432', # PgBouncer port
         'HOST': 'data.apps.cironline.org',
-        'USER': '$(project)',
-        'PASSWORD': '$(db_password)'
+        'USER': 'rainmaker',
+        'PASSWORD': '31c3Ybvhvs'
     }
 }
 
 # Static
-STATIC_URL = 'http://media.$(production_domain)/$(project)/site_media/'
+STATIC_URL = 'http://media.apps.cironline.org/rainmaker/site_media/'
 
-ADMIN_MEDIA_PREFIX = 'http://media.$(production_domain)/$(project)/site_media/admin/'
+ADMIN_MEDIA_PREFIX = 'http://media.apps.cironline.org/rainmaker/site_media/admin/'
 
 # GEOS paths for GeoDjango and GDAL. Configured for our particular Heroku setup.
 GEOS_LIBRARY_PATH = '/app/.geodjango/geos/lib/libgeos_c.so'
