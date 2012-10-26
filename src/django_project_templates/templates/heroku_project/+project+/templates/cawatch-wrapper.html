@@ -4,8 +4,17 @@
 
 {% block wrapper_meta %}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="{% block description %}{% endblock %}">
-	<meta name="author" content="{% block content_author %}{% endblock %}">
+	<meta name="description" content="{% block meta_description %}{% endblock %}">
+	<meta name="author" content="{% block content_author %}California Watch{% endblock %}">
+	
+	<meta property="og:title" content="{% block og_title %}California Watch | Bold new journalism{% endblock %}" />
+	<meta property="og:description" content="{% block og_description %}{% endblock %}" />
+	<meta property="og:type" content="website"/>
+	<meta property="og:url" content="{% block custom_url %}{{ request.get_full_path }}{% endblock %}"/>
+	<meta property="og:site_name" content="{% block custom_sitename %}California Watch{% endblock %}"/>
+	<meta property="og:image" content="{% block custom_og_image %}{{ STATIC_URL }}image/CA-Watch-C-transparent.png{% endblock %}"/>
+	<meta property="fb:app_id" content="188071984651990"/>
+	
 {% endblock %}
 
 {% block wrapper_css %}
@@ -17,6 +26,12 @@
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<style>
+		body {
+			width : 960px ;
+			margin : 0 auto ;
+		}
+	</style>
 	<![endif]-->
 
 	<!-- Le fav and touch icons -->
@@ -38,7 +53,7 @@
 				<li class="leaf last"><a href="/rss-feeds"><img src="http://media.apps.cironline.org/shared/cawatch-responsive/img/rss_16.png" width="16" height="16" alt="RSS"></a></li>
 			</ul>
 		</div>
-		<img class="cawatch-logo" src="http://media.apps.cironline.org/shared/cawatch-responsive/img/cawatch-logo.gif">
+		<a href="http://californiawatch.org/"><img class="cawatch-logo" src="http://media.apps.cironline.org/shared/cawatch-responsive/img/cawatch-logo.gif" border="0"></a>
 		<p class="tagline">Founded by the Center for Investigative Reporting</p>
 	</div>
 	
@@ -82,6 +97,7 @@
 	<article class="row-fluid">
 	
 		<header>
+			{% block section-label %}
 			<ul class="section-label">
 				<!--insert category-->
 				<li><a href="http://californiawatch.org/topic/public-safety">Public Safety</a></li>
@@ -90,6 +106,7 @@
 				<!--insert package name-->
 				<li><a href="http://californiawatch.org/broken-shield">Broken Shield</a></li>
 			</ul>
+			{% endblock %}
 			<h1>{% block main-headline %}{% endblock %}</h1>
 			<p class="intro-text">{% block intro-text %}{% endblock %}</p>
 		</header>
@@ -163,10 +180,11 @@
 		<div class="span12 copyright">© 2012 California Watch</div>
 	</div>
 
+	<script src="{{ STATIC_URL }}js/os-orientationchange-fix.js"></script>
 	<!-- Le javascript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="http://media.apps.cironline.org/shared/bootstrap/js/jquery.js"></script>
+	<!--<script src="http://media.apps.cironline.org/shared/bootstrap/js/jquery.js"></script>-->
 	<script src="http://media.apps.cironline.org/shared/bootstrap/js/bootstrap-transition.js"></script>
 	<script src="http://media.apps.cironline.org/shared/bootstrap/js/bootstrap-alert.js"></script>
 	<script src="http://media.apps.cironline.org/shared/bootstrap/js/bootstrap-modal.js"></script>
