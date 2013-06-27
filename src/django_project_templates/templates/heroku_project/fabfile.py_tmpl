@@ -60,11 +60,11 @@ def bootstrap():
     """
     # Install requirements
     local("pip install -r ./requirements.txt")
-    
+
     # Create database
     create_database(local)
     local("python ./%(project_name)s/manage.py syncdb --noinput" % env)
-    
+
     # Set virtualenv vars for local dev
     local('echo "export PROJECT_NAME=\"%(project_name)s\"" >> \$WORKON_HOME/%(project_name)s/bin/postactivate' % env)
     local('echo "export DJANGO_SETTINGS_MODULE=\"%(project_name)s.settings\"" >> \$WORKON_HOME/%(project_name)s/bin/postactivate' % env)
@@ -105,21 +105,26 @@ Database setup and deploy
 
 def dump_database(func=local):
     func('pg_dump --no-owner %(project_name)s | gzip -c > %(localpath)s/data/dump.sql.gz' % env)
-    
+
 def create_database(func=run):
     """
     Creates the user and database for this project.
+    Assumes Postgis is installed with Mac OS X Homebrew
     """
     func('echo "CREATE USER %(project_name)s WITH PASSWORD \'%(database_password)s\';" | psql postgres' % env)
-    func('createdb -O %(project_name)s %(project_name)s -T template_postgis' % env)
+    func('createdb -O %(project_name)s %(project_name)s' % env)
+    # Postgis 2.0
+    func('psql -d %(project_name)s -U %(project_name)s -f /usr/local/Cellar/postgis/2.0.3/share/postgis/postgis.sql' % env)
+    func('psql -d %(project_name)s -U %(project_name)s -f /usr/local/Cellar/postgis/2.0.3/share/postgis/spatial_ref_sys.sql' % env)
+
     func('echo "GRANT ALL PRIVILEGES ON %(project_name)s to %(project_name)s;" | psql postgres' % env)
     func('psql -c "ALTER TABLE public.spatial_ref_sys OWNER TO %(project_name)s" %(project_name)s;' % env)
     func('psql -c "ALTER TABLE public.geometry_columns OWNER TO %(project_name)s" %(project_name)s;'% env )
-    
+
 def destroy_database(func=run):
     """
     Destroys the user and database for this project.
-    
+
     Will not cause the fab to fail if they do not exist.
     """
     with settings(warn_only=True):
@@ -135,13 +140,13 @@ def load_data():
     local("scp %(localpath)s/data/dump.sql.gz %(user)s@data.$(production_domain):data/%(project_name)s" % env)
     run("gunzip %(dbserver_path)s/data/%(project_name)s/dump.sql.gz" % env)
     run('psql -U %(project_name)s -q %(project_name)s < %(dbserver_path)s/data/%(project_name)s/dump.sql' % env)
-    
+
 def pgbouncer_down():
     """
     Stop pgpool so that it won't prevent the database from being rebuilt.
     """
     sudo('/etc/init.d/pgbouncer stop')
-    
+
 def pgbouncer_up():
     """
     Start pgpool.
@@ -193,9 +198,9 @@ def shiva_the_destroyer():
 def shiva_local():
     """
     Undo any local setup.  This will *destroy* your local database, so use with caution.
-    """    
+    """
     destroy_database(local)
-    
+
 """
 3 ... 2 ... 1 ... blastoff
 """
