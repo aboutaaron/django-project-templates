@@ -1,6 +1,8 @@
 h2. Django-project-templates
 
-To clone this repo: `git clone -b postgis-2.0-django-1.5 --single-branch git://github.com/cirlabs/django-project-templates.git`
+To clone this repo: 
+
+pre. git clone -b postgis-2.0-django-1.5 --single-branch git://github.com/cirlabs/django-project-templates.git
 
 This project contains templates for creating a new Django project. It's like running django-admin.py startproject but it creates a more complete application skeleton.
 
