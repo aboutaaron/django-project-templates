@@ -109,17 +109,11 @@ def dump_database(func=local):
 def create_database(func=run):
     """
     Creates the user and database for this project.
-    Assumes Postgis is installed with Mac OS X Homebrew
     """
-    func('echo "CREATE USER %(project_name)s WITH PASSWORD \'%(database_password)s\';" | psql postgres' % env)
+    func('echo "CREATE USER %(project_name)s WITH PASSWORD \'%(database_password)s\'" | psql postgres' % env)
     func('createdb -O %(project_name)s %(project_name)s' % env)
-    # Postgis 2.0
-    func('psql -d %(project_name)s -U %(project_name)s -f /usr/local/Cellar/postgis/2.0.3/share/postgis/postgis.sql' % env)
-    func('psql -d %(project_name)s -U %(project_name)s -f /usr/local/Cellar/postgis/2.0.3/share/postgis/spatial_ref_sys.sql' % env)
-
-    func('echo "GRANT ALL PRIVILEGES ON %(project_name)s to %(project_name)s;" | psql postgres' % env)
+    func('echo "CREATE EXTENSION postgis;" | psql %(project_name)s' % env)
     func('psql -c "ALTER TABLE public.spatial_ref_sys OWNER TO %(project_name)s" %(project_name)s;' % env)
-    func('psql -c "ALTER TABLE public.geometry_columns OWNER TO %(project_name)s" %(project_name)s;'% env )
 
 def destroy_database(func=run):
     """
