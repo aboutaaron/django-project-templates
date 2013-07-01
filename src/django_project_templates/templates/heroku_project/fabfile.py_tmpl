@@ -110,7 +110,7 @@ def create_database(func=run):
     """
     Creates the user and database for this project.
     """
-    func('echo "CREATE USER %(project_name)s WITH PASSWORD \'%(database_password)s\'" | psql postgres' % env)
+    func("echo 'CREATE USER "%(project_name)s" WITH PASSWORD \'%(database_password)s\' | psql postgres" % env)
     func('createdb -O %(project_name)s %(project_name)s' % env)
     func('echo "CREATE EXTENSION postgis;" | psql %(project_name)s' % env)
     func('psql -c "ALTER TABLE public.spatial_ref_sys OWNER TO %(project_name)s" %(project_name)s;' % env)
