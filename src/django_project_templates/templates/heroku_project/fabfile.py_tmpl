@@ -65,12 +65,7 @@ def bootstrap():
     create_database(local)
     local("python ./%(project_name)s/manage.py syncdb --noinput" % env)
 
-    # Set virtualenv vars for local dev
-    local('echo "export PROJECT_NAME=\"%(project_name)s\"" >> \$WORKON_HOME/%(project_name)s/bin/postactivate' % env)
-    local('echo "export DJANGO_SETTINGS_MODULE=\"%(project_name)s.settings\"" >> \$WORKON_HOME/%(project_name)s/bin/postactivate' % env)
-    local('echo "export PYTHONPATH=%(localpath)s:%(localpath)s/%(project_name)s" >> \$WORKON_HOME/%(project_name)s/bin/postactivate' % env)
-    local('echo "export PATH=\$PATH:%s" >> \$WORKON_HOME/%s/bin/postactivate' % (BASE_DIR, env.project_name))
-    local('echo "*.pyc\ndata\n%(project_name)s/gzip\n%(project_name)s/static" > .gitignore' % env)
+    local('echo "*.pyc\ndata\n%(project_name)s/gzip\n%(project_name)s/static\n.DS_Store" > .gitignore' % env)
 
 """
 Heroku
@@ -110,7 +105,7 @@ def create_database(func=run):
     """
     Creates the user and database for this project.
     """
-    func("echo 'CREATE USER "%(project_name)s" WITH PASSWORD \'%(database_password)s\' | psql postgres" % env)
+    func('echo "CREATE USER %(project_name)s WITH PASSWORD \'%(database_password)s\'" | psql postgres' % env)
     func('createdb -O %(project_name)s %(project_name)s' % env)
     func('echo "CREATE EXTENSION postgis;" | psql %(project_name)s' % env)
     func('psql -c "ALTER TABLE public.spatial_ref_sys OWNER TO %(project_name)s" %(project_name)s;' % env)
