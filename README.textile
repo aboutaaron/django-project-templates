@@ -55,8 +55,8 @@ python setup.py install
 cd ..; rm -rf django-project-templates
 
 3. Create a new Heroku template:  
-p
-re. paster create --template=heroku_project example
+
+pre. paster create --template=heroku_project example
 
 4. Bootstrap the environment:  
 
