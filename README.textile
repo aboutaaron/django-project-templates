@@ -34,7 +34,7 @@ h3. Requirements
     - Virtualenv and VirtualenvWrapper  
     - Postgres and PostGIS running locally  
     - Libevent  
-    - Libmemcached - This is an adventure on OS X  
+    - Memcached/Libmemcached - https://gist.github.com/mikejcorey/6442295
     - Homebrew will make your life easier for most of the above  
 
 *For deployment:*  
