@@ -106,9 +106,9 @@ def create_database(func=run):
     Creates the user and database for this project.
     """
     func('echo "CREATE USER %(project_name)s WITH PASSWORD \'%(database_password)s\'" | psql postgres' % env)
-    func('createdb -O %(project_name)s %(project_name)s' % env)
-    func('echo "CREATE EXTENSION postgis;" | psql %(project_name)s' % env)
-    func('psql -c "ALTER TABLE public.spatial_ref_sys OWNER TO %(project_name)s" %(project_name)s;' % env)
+    func('createdb -O %(project_name)s %(project_name)s_public' % env)
+    func('echo "CREATE EXTENSION postgis;" | psql %(project_name)s_public' % env)
+    func('psql -c "ALTER TABLE public.spatial_ref_sys OWNER TO %(project_name)s" %(project_name)s_public;' % env)
 
 def destroy_database(func=run):
     """
@@ -129,18 +129,6 @@ def load_data():
     local("scp %(localpath)s/data/dump.sql.gz %(user)s@data.$(production_domain):data/%(project_name)s" % env)
     run("gunzip %(dbserver_path)s/data/%(project_name)s/dump.sql.gz" % env)
     run('psql -U %(project_name)s -q %(project_name)s < %(dbserver_path)s/data/%(project_name)s/dump.sql' % env)
-
-def pgbouncer_down():
-    """
-    Stop pgpool so that it won't prevent the database from being rebuilt.
-    """
-    sudo('/etc/init.d/pgbouncer stop')
-
-def pgbouncer_up():
-    """
-    Start pgpool.
-    """
-    sudo('/etc/init.d/pgbouncer start')
 
 def deploy_data():
     dump_database()

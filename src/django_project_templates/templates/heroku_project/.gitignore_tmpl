@@ -1,3 +1,4 @@
 *.pyc
 data/*
 $(project)/gzip/*
+.DS_Store
