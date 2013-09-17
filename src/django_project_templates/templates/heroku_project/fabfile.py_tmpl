@@ -63,7 +63,7 @@ def bootstrap():
 
     # Create database
     create_database(local)
-    local("python ./%(project_name)s/manage.py syncdb --noinput" % env)
+    local("python ./%(project_name)s_public/manage.py syncdb --noinput" % env)
 
     local('echo "*.pyc\ndata\n%(project_name)s/gzip\n%(project_name)s/static\n.DS_Store" > .gitignore' % env)
 
@@ -89,10 +89,10 @@ def deploy_to_heroku():
     local("git push heroku master")
 
 def heroku_shell():
-    local("heroku run python %(project_name)s/manage.py shell --settings=%(project_name)s.settings.production")
+    local("heroku run python %(project_name)s_public/manage.py shell --settings=%(project_name)s.settings.production")
 
 def heroku_clear_cache():
-    local("heroku run python %(project_name)s/manage.py clearcache --settings=%(project_name)s.settings.production" % env)
+    local("heroku run python %(project_name)s_public/manage.py clearcache --settings=%(project_name)s.settings.production" % env)
 
 """
 Database setup and deploy
@@ -155,7 +155,7 @@ def deploy_to_s3():
     local(('s3cmd -P --add-header=Content-encoding:gzip --guess-mime-type --rexclude-from=%(localpath)s/s3exclude sync %(gzip_path)s s3://%(s3_bucket)s/%(project_name)s/%(site_media_prefix)s/') % env)
 
 def deploy_static():
-    local("python ./%(project_name)s/manage.py collectstatic" % env)
+    local("python ./%(project_name)s_public/manage.py collectstatic" % env)
     gzip_assets()
     deploy_to_s3()
 
