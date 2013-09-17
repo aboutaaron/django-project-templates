@@ -22,7 +22,7 @@ Note that this project skeleton is still in flux. It definitely contains some th
 
 h2. Heroku template
 
-Drawing on work from the Chicago Tribune, we (the Center for Investigative Reporting) put together a project template for launching news apps in a Heroku environment. You can read more about it "here.":http://cironline.org/blog/post/heroku-news-apps-3415
+Drawing on work from the Chicago Tribune, we (the Center for Investigative Reporting) put together a project template for launching news apps in a Heroku environment. You can read more about it "here.":http://cironline.org/blog/post/heroku-news-apps-3415 
 
 pre. paster create --template=heroku_project project_name
 
@@ -43,37 +43,45 @@ h3. Requirements
 
 h3. Creating a new app
 
-1. Create a new virtual environment:  
+1. Create a new virtual environment:
+
 pre. mkvirtualenv example
 
 2. Check out our fork of django-project-templates:
 
 pre. git clone git://github.com/cirlabs/django-project-templates.git  
-pre. cd django-project-templates  
-pre. python setup.py install  
-pre. cd ..; rm -rf django-project-templates
+cd django-project-templates  
+python setup.py install  
+cd ..; rm -rf django-project-templates
 
-3. Create a new Heroku template:  
+3. Create a new Heroku template:
+
 pre. paster create --template=heroku_project example
 
-4. Bootstrap the environment:  
+4. Bootstrap the environment:
+
 pre. cd example; fab bootstrap
 
-5. Re-log in to virtualenv:  
+5. Re-log in to virtualenv:
+
 pre. deactivate; workon example
 
 At this point, you can start developing locally. Remember: Put your static media in the "assets" folder, not the "static" folder, which is used by Django's static files framework to collect and serve static media locally.
 
 h3. Deploying to Heroku:
 
-1. Set up app for Heroku:  
+1. Set up app for Heroku:
+
 pre. fab setup_heroku
 
-2. Deploy data to data server:  
+2. Deploy data to data server:
+
 pre. fab production deploy_data
 
-3. Deploy static media to S3:  
+3. Deploy static media to S3:
+
 pre. fab production deploy_static
 
-4. Deploy app to Heroku:  
+4. Deploy app to Heroku:
+
 pre. git push heroku master
